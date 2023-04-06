@@ -18,9 +18,10 @@ public class Customer {
 	String id;
 	String name;
 	String email;
+	String password;
 	long mobile;
 	String address;
 	boolean status;
 	double wallet;
-
+	int otp;
 }
