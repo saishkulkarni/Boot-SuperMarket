@@ -3,9 +3,11 @@ package org.jsp.super_market.dto;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Entity
@@ -24,4 +26,7 @@ public class Customer {
 	boolean status;
 	double wallet;
 	int otp;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	Cart cart;
 }

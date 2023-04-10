@@ -1,11 +1,16 @@
 package org.jsp.super_market.controller;
 
+import java.util.List;
+
+import org.jsp.super_market.dto.Cart;
 import org.jsp.super_market.dto.Customer;
+import org.jsp.super_market.dto.Product;
 import org.jsp.super_market.exception.AllException;
 import org.jsp.super_market.helper.Login;
 import org.jsp.super_market.helper.ResponseStructure;
 import org.jsp.super_market.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,5 +37,16 @@ public class CustomerController {
 	@PostMapping("login")
 	public ResponseStructure<Customer> login(@RequestBody Login login) throws AllException {
 		return service.login(login);
+	}
+
+	@GetMapping("product/fetch")
+	public ResponseStructure<List<Product>> fetch() throws AllException {
+		return service.fetch();
+	}
+	
+	@PutMapping("cart/add/{cid}/{pid}")
+	public ResponseStructure<Cart> addToCart(@PathVariable String cid,@PathVariable int pid)
+	{
+		return service.addToCart(cid,pid);
 	}
 }
