@@ -1,5 +1,6 @@
 package org.jsp.super_market.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -114,29 +115,77 @@ public class CustomerService {
 
 		List<Item> items = cart.getItems();
 
+		if (items == null) {
+			items = new ArrayList<Item>();
+		}
+
 		if (items.isEmpty()) {
 			item.setName(product.getName());
 			item.setPrice(product.getPrice());
 			item.setQuantity(1);
 			items.add(item);
 		} else {
+			boolean flag = false;
 			for (Item item : items) {
 				if (item.getName().equals(product.getName())) {
 					item.setQuantity(item.getQuantity() + 1);
 					item.setPrice(item.getPrice() + product.getPrice());
+					flag = false;
 					break;
 				} else {
-					item.setName(product.getName());
-					item.setPrice(product.getPrice());
-					item.setQuantity(1);
-					break;
+					flag = true;
 				}
 			}
+			if (flag) {
+				item.setName(product.getName());
+				item.setPrice(product.getPrice());
+				item.setQuantity(1);
+				items.add(item);
+			}
+
 		}
+
 		cart.setItems(items);
 		customer.setCart(cart);
 
 		structure.setMessage("Added to Cart");
+		structure.setStatuscode(HttpStatus.ACCEPTED.value());
+		structure.setData(dao.save(customer).getCart());
+
+		return structure;
+	}
+
+	public ResponseStructure<Cart> removeFromCart(String cid, int pid) throws AllException {
+		ResponseStructure<Cart> structure = new ResponseStructure<>();
+
+		Customer customer = dao.find(cid);
+		Product product = productDao.find(pid);
+
+		Cart cart = customer.getCart();
+		List<Item> items = cart.getItems();
+		if (items.isEmpty()) {
+			throw new AllException("No Items in Cart");
+		} else {
+			Item item2 = null;
+			for (Item item : items) {
+				if (item.getName().equals(product.getName())) {
+					if (item.getQuantity() > 1) {
+						item.setQuantity(item.getQuantity() - 1);
+						item.setPrice(item.getPrice() - product.getPrice());
+					} else {
+						item2 = item;
+					}
+				}
+			}
+			if (item2 != null) {
+				items.remove(item2);
+			}
+
+		}
+		cart.setItems(items);
+		customer.setCart(cart);
+
+		structure.setMessage("Removed from Cart");
 		structure.setStatuscode(HttpStatus.ACCEPTED.value());
 		structure.setData(dao.save(customer).getCart());
 

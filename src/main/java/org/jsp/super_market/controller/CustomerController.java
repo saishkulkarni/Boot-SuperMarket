@@ -10,6 +10,7 @@ import org.jsp.super_market.helper.Login;
 import org.jsp.super_market.helper.ResponseStructure;
 import org.jsp.super_market.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,5 +49,11 @@ public class CustomerController {
 	public ResponseStructure<Cart> addToCart(@PathVariable String cid,@PathVariable int pid)
 	{
 		return service.addToCart(cid,pid);
+	}
+	
+	@DeleteMapping("cart/remove/{cid}/{pid}")
+	public ResponseStructure<Cart> removeFromCart(@PathVariable String cid,@PathVariable int pid) throws AllException
+	{
+		return service.removeFromCart(cid,pid);
 	}
 }
