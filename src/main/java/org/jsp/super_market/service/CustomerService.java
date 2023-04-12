@@ -1,15 +1,19 @@
 package org.jsp.super_market.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import org.jsp.super_market.dao.CustomerDao;
+import org.jsp.super_market.dao.MerchantDao;
 import org.jsp.super_market.dao.ProductDao;
 import org.jsp.super_market.dto.Cart;
 import org.jsp.super_market.dto.Customer;
 import org.jsp.super_market.dto.Item;
+import org.jsp.super_market.dto.Merchant;
 import org.jsp.super_market.dto.Product;
+import org.jsp.super_market.dto.ShoppingOrder;
 import org.jsp.super_market.exception.AllException;
 import org.jsp.super_market.helper.Login;
 import org.jsp.super_market.helper.ResponseStructure;
@@ -28,6 +32,9 @@ public class CustomerService {
 	CustomerDao dao;
 
 	@Autowired
+	MerchantDao merchantDao;
+
+	@Autowired
 	ProductDao productDao;
 
 	@Autowired
@@ -35,6 +42,9 @@ public class CustomerService {
 
 	@Autowired
 	Item item;
+
+	@Autowired
+	ShoppingOrder order;
 
 	public ResponseStructure<Customer> signup(Customer customer) {
 		ResponseStructure<Customer> structure = new ResponseStructure<>();
@@ -188,6 +198,93 @@ public class CustomerService {
 		structure.setMessage("Removed from Cart");
 		structure.setStatuscode(HttpStatus.ACCEPTED.value());
 		structure.setData(dao.save(customer).getCart());
+
+		return structure;
+	}
+
+	public ResponseStructure<List<ShoppingOrder>> placeOrder(String cid) throws AllException {
+		ResponseStructure<List<ShoppingOrder>> structure = new ResponseStructure<>();
+
+		Customer customer = dao.find(cid);
+
+		Cart cart = customer.getCart();
+		List<Item> items = cart.getItems();
+		double price = 0;
+
+		for (Item item : items) {
+			price = price + item.getPrice();
+		}
+
+		order.setDateTime(LocalDateTime.now());
+		order.setItems(items);
+		order.setPrice(price);
+
+		List<ShoppingOrder> list = customer.getOrders();
+		if (list == null) {
+			list = new ArrayList<>();
+		}
+		list.add(order);
+
+		customer.setOrders(list);
+
+		if (customer.getWallet() < price) {
+			throw new AllException("Insufficient Fund to Place Order");
+		} else {
+			for (Item item : order.getItems()) {
+				Product product = productDao.find(item.getName());
+				Merchant merchant = product.getMerchant();
+				merchant.setWallet(merchant.getWallet() + item.getPrice());
+
+				merchantDao.save(merchant);
+			}
+			customer.setWallet(customer.getWallet() - price);
+			customer.setCart(null);
+			structure.setMessage("Placed Order");
+			structure.setStatuscode(HttpStatus.ACCEPTED.value());
+			structure.setData(dao.save(customer).getOrders());
+		}
+
+		return structure;
+	}
+
+	public ResponseStructure<Customer> addMoney(String cid, double amt) {
+		ResponseStructure<Customer> structure = new ResponseStructure<>();
+		Customer customer = dao.find(cid);
+		customer.setWallet(customer.getWallet() + amt);
+
+		structure.setMessage("Added Money");
+		structure.setStatuscode(HttpStatus.ACCEPTED.value());
+		structure.setData(dao.save(customer));
+		return structure;
+	}
+
+	public ResponseStructure<List<ShoppingOrder>> viewAllOrders(String cid) throws AllException {
+		ResponseStructure<List<ShoppingOrder>> structure = new ResponseStructure<>();
+
+		Customer customer = dao.find(cid);
+		List<ShoppingOrder> orders = customer.getOrders();
+		if (orders.isEmpty()) {
+			throw new AllException("No Orders FOund");
+		} else {
+			structure.setMessage("Orders Found");
+			structure.setStatuscode(HttpStatus.FOUND.value());
+			structure.setData(orders);
+		}
+		return structure;
+	}
+
+	public ResponseStructure<Product> review(int pid) {
+		ResponseStructure<Product> structure = new ResponseStructure<>();
+		Product product = productDao.find(pid);
+		product.setBadreview(product.getBadreview() + 1);
+
+		if (product.getBadreview() > 3) {
+			product.setStatus(false);
+		}
+
+		structure.setMessage("Review Updated");
+		structure.setStatuscode(HttpStatus.ACCEPTED.value());
+		structure.setData(productDao.save(product));
 
 		return structure;
 	}

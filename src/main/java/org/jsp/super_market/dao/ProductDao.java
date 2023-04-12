@@ -37,5 +37,10 @@ public class ProductDao {
 	public List<Product> fetchCustomerProducts() {
 		return repository.findByStatus(true);
 	}
+	
+	public Product find(String name)
+	{
+		return repository.findByName(name);
+	}
 
 }

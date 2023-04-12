@@ -5,6 +5,7 @@ import java.util.List;
 import org.jsp.super_market.dto.Cart;
 import org.jsp.super_market.dto.Customer;
 import org.jsp.super_market.dto.Product;
+import org.jsp.super_market.dto.ShoppingOrder;
 import org.jsp.super_market.exception.AllException;
 import org.jsp.super_market.helper.Login;
 import org.jsp.super_market.helper.ResponseStructure;
@@ -44,16 +45,34 @@ public class CustomerController {
 	public ResponseStructure<List<Product>> fetch() throws AllException {
 		return service.fetch();
 	}
-	
+
 	@PutMapping("cart/add/{cid}/{pid}")
-	public ResponseStructure<Cart> addToCart(@PathVariable String cid,@PathVariable int pid)
-	{
-		return service.addToCart(cid,pid);
+	public ResponseStructure<Cart> addToCart(@PathVariable String cid, @PathVariable int pid) {
+		return service.addToCart(cid, pid);
 	}
-	
+
 	@DeleteMapping("cart/remove/{cid}/{pid}")
-	public ResponseStructure<Cart> removeFromCart(@PathVariable String cid,@PathVariable int pid) throws AllException
-	{
-		return service.removeFromCart(cid,pid);
+	public ResponseStructure<Cart> removeFromCart(@PathVariable String cid, @PathVariable int pid) throws AllException {
+		return service.removeFromCart(cid, pid);
+	}
+
+	@PutMapping("order/place/{cid}")
+	public ResponseStructure<List<ShoppingOrder>> placeOrder(@PathVariable String cid) throws AllException {
+		return service.placeOrder(cid);
+	}
+
+	@PutMapping("wallet/{cid}/{amt}")
+	public ResponseStructure<Customer> addMoney(@PathVariable String cid, @PathVariable double amt) {
+		return service.addMoney(cid, amt);
+	}
+
+	@GetMapping("order/fetch/{cid}")
+	public ResponseStructure<List<ShoppingOrder>> viewAllOrders(@PathVariable String cid) throws AllException {
+		return service.viewAllOrders(cid);
+	}
+
+	@PutMapping("review/{pid}")
+	public ResponseStructure<Product> review(@PathVariable int pid) {
+		return service.review(pid);
 	}
 }
