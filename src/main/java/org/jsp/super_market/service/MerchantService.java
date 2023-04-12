@@ -84,6 +84,7 @@ public class MerchantService {
 
 		Merchant merchant = dao.find(mid);
 
+		product.setName(merchant.getName() + "-" + product.getName());
 		product.setMerchant(merchant);
 
 		List<Product> list = merchant.getProducts();
@@ -123,7 +124,7 @@ public class MerchantService {
 	}
 
 	public ResponseStructure<Product> deleteProduct(String mid, int pid) {
-		Merchant merchant=dao.find(mid);
+		Merchant merchant = dao.find(mid);
 		Product product = dao2.find(pid);
 		merchant.getProducts().remove(product);
 		dao.save(merchant);

@@ -215,8 +215,11 @@ public class CustomerService {
 			price = price + item.getPrice();
 		}
 
+		List<Item> items2=new ArrayList<>();
+		items2.addAll(items);
+		
 		order.setDateTime(LocalDateTime.now());
-		order.setItems(items);
+		order.setItems(items2);
 		order.setPrice(price);
 
 		List<ShoppingOrder> list = customer.getOrders();
@@ -232,6 +235,12 @@ public class CustomerService {
 		} else {
 			for (Item item : order.getItems()) {
 				Product product = productDao.find(item.getName());
+				if (product.getStock() < item.getQuantity()) {
+					throw new AllException("Out of Stock");
+				}
+				else {
+					product.setStock(product.getStock()-item.getQuantity());
+				}
 				Merchant merchant = product.getMerchant();
 				merchant.setWallet(merchant.getWallet() + item.getPrice());
 

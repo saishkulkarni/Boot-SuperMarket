@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Reebok\",\r\n    \"mobile\":9898586942,\r\n    \"email\":\"abc@gmail.com\",\r\n    \"password\":\"123\"\r\n}",
+					"raw": "{\r\n    \"name\":\"Reebok\",\r\n    \"mobile\":9898586942,\r\n    \"email\":\"reebok@gmail.com\",\r\n    \"password\":\"123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -39,7 +39,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/merchant/verify/mid6280/288123",
+					"raw": "localhost:8080/merchant/verify/mid3113/280400",
 					"host": [
 						"localhost"
 					],
@@ -47,8 +47,8 @@
 					"path": [
 						"merchant",
 						"verify",
-						"mid6280",
-						"288123"
+						"mid3113",
+						"280400"
 					]
 				}
 			},
@@ -61,7 +61,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\":\"mid3967\",\r\n    \"password\":\"123\"\r\n}",
+					"raw": "{\r\n    \"id\":\"mid3113\",\r\n    \"password\":\"123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -89,7 +89,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Saish\",\r\n    \"mobile\":879787987,\r\n    \"email\":\"saishkulkarni7@gmail.com\",\r\n    \"password\":4646,\r\n    \"address\":\"Bangalore\"\r\n}",
+					"raw": "{\r\n    \"name\":\"Saish\",\r\n    \"mobile\":879787987,\r\n    \"email\":\"saishkulkarni7@gmail.com\",\r\n    \"password\":123,\r\n    \"address\":\"Bangalore\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -116,7 +116,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/customer/verify/cid665/953495",
+					"raw": "localhost:8080/customer/verify/cid927/182292",
 					"host": [
 						"localhost"
 					],
@@ -124,8 +124,8 @@
 					"path": [
 						"customer",
 						"verify",
-						"cid665",
-						"953495"
+						"cid927",
+						"182292"
 					]
 				}
 			},
@@ -138,7 +138,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\":\"cid665\",\r\n    \"password\":\"4646\"\r\n}",
+					"raw": "{\r\n    \"id\":\"cid927\",\r\n    \"password\":\"123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -166,7 +166,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"shoe\",\r\n    \"price\":2890,\r\n    \"stock\":5\r\n}",
+					"raw": "{\r\n    \"name\":\"Joggers\",\r\n    \"price\":1750,\r\n    \"stock\":20\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -174,7 +174,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/merchant/product/add/mid3967",
+					"raw": "localhost:8080/merchant/product/add/mid3113",
 					"host": [
 						"localhost"
 					],
@@ -183,7 +183,7 @@
 						"merchant",
 						"product",
 						"add",
-						"mid3967"
+						"mid3113"
 					]
 				}
 			},
@@ -195,7 +195,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/merchant/product/fetch/mid3967",
+					"raw": "localhost:8080/merchant/product/fetch/mid3113",
 					"host": [
 						"localhost"
 					],
@@ -204,7 +204,7 @@
 						"merchant",
 						"product",
 						"fetch",
-						"mid3967"
+						"mid3113"
 					]
 				}
 			},
@@ -217,7 +217,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"shoe\",\r\n    \"price\": 2890,\r\n    \"quantity\": 5\r\n}",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"Watch\",\r\n    \"price\": 7500,\r\n    \"quantity\": 7\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -225,7 +225,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/merchant/product/edit/1",
+					"raw": "localhost:8080/merchant/product/edit/mid6280",
 					"host": [
 						"localhost"
 					],
@@ -234,27 +234,7 @@
 						"merchant",
 						"product",
 						"edit",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Customer - ViewProducts",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/customer/prodduct/fetch",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"customer",
-						"prodduct",
-						"fetch"
+						"mid6280"
 					]
 				}
 			},
@@ -266,7 +246,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/merchant/product/delete/1",
+					"raw": "localhost:8080/merchant/product/delete/mid6280/3",
 					"host": [
 						"localhost"
 					],
@@ -275,133 +255,8 @@
 						"merchant",
 						"product",
 						"delete",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Customer - AddToCart",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/customer/cart/add/cid665/1",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"customer",
-						"cart",
-						"add",
-						"cid665",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Customer - RemoveFromCart",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/customer/cart/remove/cid665/1",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"customer",
-						"cart",
-						"remove",
-						"cid665",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Customer - PlaceOrder",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/customer/order/place/cid665",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"customer",
-						"order",
-						"place",
-						"cid665"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Customer - ViewAllOrders",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/customer/order/fetch/cid665",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"customer",
-						"order",
-						"fetch",
-						"cid665"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Customer - ReviewProduct",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/customer/review/1",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"customer",
-						"review",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Admin - ViewAllProducts",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/admin/product/fetch",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"admin",
-						"product",
-						"fetch"
+						"mid6280",
+						"3"
 					]
 				}
 			},
@@ -436,6 +291,26 @@
 			"response": []
 		},
 		{
+			"name": "Admin - ViewAllProducts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/admin/product/fetch",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"product",
+						"fetch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Admin - EditProduct",
 			"request": {
 				"method": "PUT",
@@ -450,6 +325,153 @@
 						"admin",
 						"product",
 						"status",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer - ViewProducts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/product/fetch",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"product",
+						"fetch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer - AddToCart",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/cart/add/cid927/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"cart",
+						"add",
+						"cid927",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer - RemoveFromCart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/cart/remove/cid927/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"cart",
+						"remove",
+						"cid927",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer - Add Money",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/wallet/cid927/15000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"wallet",
+						"cid927",
+						"15000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer - PlaceOrder",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/order/place/cid927",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"order",
+						"place",
+						"cid927"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer - ViewAllOrders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/order/fetch/cid927",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"order",
+						"fetch",
+						"cid927"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer - ReviewProduct",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/review/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"review",
 						"1"
 					]
 				}

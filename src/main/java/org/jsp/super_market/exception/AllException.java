@@ -1,5 +1,6 @@
 package org.jsp.super_market.exception;
 
+@SuppressWarnings("serial")
 public class AllException extends Exception {
 	String msg = "";
 
